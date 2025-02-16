@@ -1,4 +1,4 @@
-package com.muzaffar.apiexample
+package com.muzaffar.apiexample.view
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -26,13 +26,14 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.muzaffar.apiexample.ui.theme.APIExampleTheme
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
+import com.muzaffar.apiexample.viewmodel.PostViewModel
+import com.muzaffar.apiexample.model.Post
 
 class MainActivity : ComponentActivity() {
     @OptIn(ExperimentalMaterial3Api::class)
@@ -57,7 +58,7 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun PostItem(post:Post){
+fun PostItem(post: Post){
     Card(
         modifier = Modifier.fillMaxWidth().padding(8.dp),
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
@@ -104,6 +105,7 @@ fun PostListScreen(modifier:Modifier, viewModel: PostViewModel = viewModel()){
                         modifier = Modifier.fillMaxSize(),
                         contentPadding = PaddingValues(8.dp)
                     ){
+                        // For each post, show a PostItem composable
                         items(posts){
                             post -> PostItem(post)
                         }

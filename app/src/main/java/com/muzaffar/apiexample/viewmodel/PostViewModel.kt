@@ -1,4 +1,4 @@
-package com.muzaffar.apiexample
+package com.muzaffar.apiexample.viewmodel
 
 import android.util.Log
 import androidx.compose.runtime.State
@@ -7,6 +7,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.muzaffar.apiexample.utilis.RetrofitInstance
+import com.muzaffar.apiexample.model.Post
 import kotlinx.coroutines.launch
 
 // ViewModel to fetch the posts from the API [MVVM]
@@ -24,7 +26,8 @@ class PostViewModel : ViewModel(){
     val error:State<String?> = _error
 
     fun fetchPosts(){
-        // Launch a coroutine (perform in background) an API call to fetch the posts
+        // Launch a coroutine (perform in background) method to call an API  to fetch the posts
+      // The scope of the coroutine will be canceled when the ViewModel is cleared
         viewModelScope.launch {
             _isLoading.value = true
             try {
